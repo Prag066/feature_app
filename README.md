@@ -1,5 +1,5 @@
 # feature_app
-just for practice
+Practice for adding multiple databases into the application
 
 python manage.py makemigrations users books
 python manage.py migrate --database=users_db
