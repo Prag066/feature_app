@@ -1,0 +1,6 @@
+[client]
+database = books_db
+user = root
+password = Prakhar@12345
+default-character-set = utf8
+default_authentication_plugin = mysql_native_passwords

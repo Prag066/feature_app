@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'books',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -74,12 +76,35 @@ WSGI_APPLICATION = 'feature_app.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'default': {},
+    'users_db_qlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    "users_db": {
+        "ENGINE": "django.db.backends.mysql",
+        "OPTIONS": {
+            # 'charset': "utf8mb4",
+            # 'sql_mode': "STRICT_TRANS_TABLES",
+            "read_default_file": f"{BASE_DIR}/users.cnf",
+            
+        }
+    },
+    "books_db": {
+        "ENGINE": "django.db.backends.mysql",
+        "OPTIONS": {
+            # 'charset': "utf8mb4",
+            # 'sql_mode': "STRICT_TRANS_TABLES",
+            "read_default_file": f"{BASE_DIR}/books.cnf",
+            
+        }
     }
 }
+# python manage.py migrate --database _mysql
+# obj.save(using=_mysql)
+# obj.objects.all().using("_mysql")
 
+# "feature_app.UsersRouter.UsersRouter",
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -121,3 +146,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATABASE_ROUTERS = ["feature_app.UsersRouter.UsersRouter","feature_app.BooksRouter.BooksRouter"]
